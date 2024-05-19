@@ -13,6 +13,7 @@ function App() {
 	const showCart = useSelector(state => state.cartReducer.cartIsVisible)
 	const cart = useSelector(state => state.cartReducer.products)
 	const notification = useSelector(state => state.cartReducer.notification)
+	const isCartChanged = useSelector(state => state.cartReducer.changed)
 
 	useEffect(() => {
 		dispatch(fetchCartData())
@@ -23,8 +24,10 @@ function App() {
 			isInitial = false
 			return
 		}
-		dispatch(sendCartData(cart))
-	}, [cart, dispatch])
+		if (isCartChanged) {
+			dispatch(sendCartData(cart))
+		}
+	}, [cart, dispatch, isCartChanged])
 	return (
 		<>
 			{notification && (
