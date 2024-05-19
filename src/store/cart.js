@@ -2,10 +2,17 @@ import { createSlice } from '@reduxjs/toolkit'
 
 const cartSlice = createSlice({
 	name: 'cart',
-	initialState: { cartIsVisible: false, products: [] },
+	initialState: { cartIsVisible: false, notification: null, products: [] },
 	reducers: {
 		toggle(state) {
 			state.cartIsVisible = !state.cartIsVisible
+		},
+		showNotification(state, action) {
+			state.notification = {
+				status: action.payload.status,
+				title: action.payload.title,
+				message: action.payload.message,
+			}
 		},
 		addItemToCart(state, action) {
 			const existingItem = state.products.find(product => product.title === action.payload.title)
