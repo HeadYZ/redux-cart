@@ -12,9 +12,10 @@ export const fetchCartData = () => {
 		}
 		try {
 			const cartData = await fetchData()
+			console.log(cartData)
 			dispatch(
 				cartActions.replaceCart({
-					products: cartData || [],
+					products: cartData.products || [],
 				})
 			)
 		} catch (error) {
